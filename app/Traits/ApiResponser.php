@@ -28,9 +28,8 @@ trait ApiResponser
                 'meta' => [
                     'success' => false,
                     'code' => $metaCode,
-                    'message' => $errorMessage,
+                    'description' => $errorMessage,
                 ],
-                'data' => null,
             ],
             $statusCode,
         );
@@ -85,7 +84,7 @@ trait ApiResponser
                 'next_page_url' => $nextPageUrl
             ]
         ];
-        if($lastPage != null) {
+        if ($lastPage != null) {
             $pageDetail['data']['last_page'] = $lastPage;
         }
         return response()->json(
