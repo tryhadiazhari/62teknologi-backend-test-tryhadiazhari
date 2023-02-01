@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BusinessRequest;
+use App\Http\Requests\BusinessesRequest;
 use App\Models\Business;
 use App\Models\BusinessCategories;
 use App\Models\BusinessLocation;
@@ -11,16 +11,31 @@ use App\Traits\UuidGenerator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class BusinessController extends Controller
+class BusinessesController extends Controller
 {
     use ApiResponser, UuidGenerator;
 
-    public function index()
+    public function search(Request $request)
     {
-        //
+        $request->validate([
+            'location' => 'string',
+        ]);
+
+        if ($request->location) {
+            $search = Business::whereHas('location', function ($query) use ($request) {
+                $query->where('city', $request->location);
+            })->get();
+        }
+
+        foreach ($search as $data) {
+
+            $array[] = $data;
+        }
+
+        return $array;
     }
 
-    public function store(BusinessRequest $request)
+    public function store(BusinessesRequest $request)
     {
         $create = Business::create([
             'alias' => $request->alias,
@@ -64,12 +79,7 @@ class BusinessController extends Controller
         }
     }
 
-    public function show(Business $business)
-    {
-        //
-    }
-
-    public function update(BusinessRequest $request, $id)
+    public function update(BusinessesRequest $request, $id)
     {
         $create = Business::find($id)->update([
             'alias' => $request->alias,

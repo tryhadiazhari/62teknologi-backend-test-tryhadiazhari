@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BusinessController;
+use App\Http\Controllers\BusinessesController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,8 +23,11 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware('auth:sanctum')->group(function () {
-        Route::post('/business', [BusinessController::class, 'store']);
-        Route::put('/business/{id}', [BusinessController::class, 'update']);
-        Route::delete('/business/{id}', [BusinessController::class, 'destroy']);
+        Route::controller(BusinessesController::class)->group(function () {
+            Route::get('/businesses/search', 'search');
+            Route::post('/businesses', 'store');
+            Route::put('/businesses/{id}', 'update');
+            Route::delete('/businesses/{id}', 'destroy');
+        });
     });
 });

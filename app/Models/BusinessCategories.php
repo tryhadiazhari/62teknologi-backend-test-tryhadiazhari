@@ -19,4 +19,9 @@ class BusinessCategories extends Model
     protected $keyType = 'string';
 
     protected $guarded = ['id'];
+
+    public function business()
+    {
+        return $this->hasOne(Business::class, 'id', 'business_id');
+    }
 }
