@@ -10,7 +10,7 @@ trait UuidGenerator
     {
         static::creating(function ($model) {
             if (!$model->getKey()) {
-                $model->{$model->getKeyName()} = substr(Str::uuid(), 0, 13);
+                $model->{$model->getKeyName()} = substr(str_replace(array('-'), '', (string) Str::uuid()), 0, 22);
             }
         });
     }

@@ -17,17 +17,17 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('alias')->nullable();
             $table->string('name')->nullable();
-            $table->text('image_url')->nullable();
-            $table->boolean('is_closed')->unsigned()->default(0);
-            $table->text('url')->nullable();
-            $table->integer('review_count')->unsigned()->default(0);
-            // $table->integer('categories_id')->unsigned()->nullable();
-            $table->double('rating')->default(0);
+            $table->string('image_url')->nullable();
+            $table->boolean('is_closed')->default(false);
+            $table->string('url')->nullable();
+            $table->string('review_count')->nullable();
+            $table->string('rating')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
-            $table->enum('price', [1, 2, 3, 4])->default(1);
-            $table->bigInteger('country_code')->unsigned()->default(0);
-            $table->bigInteger('phone')->unsigned()->default(0);
+            $table->string('price')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('display_phone')->nullable();
+            $table->string('distance')->nullable();
             $table->timestamps();
         });
     }

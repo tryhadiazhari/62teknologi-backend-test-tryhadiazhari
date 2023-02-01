@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BusinessLocation extends Model
+class BusinessCategories extends Model
 {
     use HasFactory;
 
-    protected $connection = 'mysql';
-    protected $table = 'business_location';
+    protected $table = 'business_categories';
+
     public $timestamps = true;
 
     public $incrementing = true;
+
     protected $keyType = 'string';
 
     protected $guarded = ['id'];
